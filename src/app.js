@@ -1,7 +1,7 @@
 import express from 'express';
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.router.js';
-import cartsRouter from './routes/carts.router.js'; // Asegúrate de importar el router de carritos
+import cartsRouter from './routes/carts.router.js';
 
 import __dirname from './utils.js';
 import receptorMiddleware from './middlewares/receptor.js';
