@@ -2,70 +2,102 @@ import { Router } from "express";
 import fs from "fs/promises";
 import path from "path";
 import __dirname from "../utils.js";
+import crypto from 'crypto';
 
-const productsRouter = Router();
+const router = Router();
 const productsFilePath = path.join(__dirname, 'adb', 'products.json');
 
-productsRouter.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const productsData = await fs.readFile(productsFilePath, 'utf-8');
-        const products = JSON.parse(productsData);
-        res.json(products);
+        const data = await fs.readFile(productsFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        res.status(200).json(products);
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener los productos' });
+        res.status(500).json({ message: "Error al leer el archivo de productos" });
     }
 });
 
-productsRouter.post('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const productsData = await fs.readFile(productsFilePath, 'utf-8');
-        const products = JSON.parse(productsData);
+        const data = await fs.readFile(productsFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        const product = products.find(product => product.id === id);
+        if (product) {
+            res.status(200).json(product);
+        } else {
+            res.status(404).json({ error: "Producto no encontrado" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Error al leer el archivo de productos" });
+    }
+});
 
-        const newId = products.length ? products[products.length - 1].id + 1 : 1;
-        const newProduct = { id: newId, ...req.body };
-
+router.post('/', async (req, res) => {
+    const body = req.body;
+    try {
+        const data = await fs.readFile(productsFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        if (products.some(product => product.code === body.code)) {
+            return res.status(400).json({ error: "Producto ya existente" });
+        }
+        const newProduct = {
+            id: crypto.randomUUID(), // Corregido randowUUID a randomUUID
+            ...body
+        };
         products.push(newProduct);
         await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2));
-
-        res.status(201).json(newProduct);
+        res.status(201).json({ message: "Producto creado exitosamente" });
     } catch (error) {
-        res.status(500).json({ error: 'Error al agregar el producto' });
+        res.status(500).json({ message: "Error al leer o escribir el archivo de productos" });
     }
 });
 
-productsRouter.put('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
+    const { id } = req.params;
+    const body = req.body;
     try {
-        const { id } = req.params;
-        const productsData = await fs.readFile(productsFilePath, 'utf-8');
-        let products = JSON.parse(productsData);
-
-        const productIndex = products.findIndex(product => product.id == id);
-        if (productIndex === -1) {
-            return res.status(404).json({ error: 'Producto no encontrado' });
+        const data = await fs.readFile(productsFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        const index = products.findIndex(product => product.id === id);
+        if (index === -1) {
+            return res.status(404).json({ error: "Producto no encontrado" });
         }
-
-        products[productIndex] = { ...products[productIndex], ...req.body };
+        products[index] = { ...products[index], ...body };
         await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2));
-
-        res.json(products[productIndex]);
+        res.status(200).json({ message: "Producto actualizado exitosamente" });
     } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar el producto' });
+        res.status(500).json({ message: "Error al leer o escribir el archivo de productos" });
     }
 });
 
-productsRouter.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
-        const productsData = await fs.readFile(productsFilePath, 'utf-8');
-        let products = JSON.parse(productsData);
-
-        products = products.filter(product => product.id != id);
-        await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2));
-
-        res.status(204).send();
+        const data = await fs.readFile(productsFilePath, 'utf-8');
+        const products = JSON.parse(data);
+        const index = products.findIndex(product => product.id === id);
+        if (index === -1) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+        const newProducts = products.filter(product => product.id !== id);
+        await fs.writeFile(productsFilePath, JSON.stringify(newProducts, null, 2));
+        res.status(200).json({ message: "Producto eliminado" });
     } catch (error) {
-        res.status(500).json({ error: 'Error al eliminar el producto' });
+        res.status(500).json({ message: "Error al leer o escribir el archivo de productos" });
     }
 });
 
-export default productsRouter;
+export default router;
+
+
+
+// title:String,
+// description:String
+// code:String
+// price:Number
+// status:Boolean
+// stock:Number
+// category:String
+
+
