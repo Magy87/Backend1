@@ -25,6 +25,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.engine('hbs', handlebars.engine({ extname: '.hbs' }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
+app.use(express.static('public'));
 
 app.use(receptorMiddleware);
 

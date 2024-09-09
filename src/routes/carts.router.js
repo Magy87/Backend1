@@ -1,7 +1,7 @@
 import { Router } from "express";
 import fs from "fs/promises";
 import path from "path";
-import crypto from "crypto"; // Añadido para usar crypto.randomUUID
+import crypto from "crypto"; 
 import __dirname from "../utils.js";
 
 const cartsRouter = Router();
@@ -29,7 +29,7 @@ cartsRouter.post('/', async (req, res) => {
         const carts = JSON.parse(data);
 
         const newCart = {
-            id: crypto.randomUUID(), // Corregido randowUUID a randomUUID
+            id: crypto.randomUUID(),
             products: []
         };
         carts.push(newCart);
