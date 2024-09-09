@@ -1,3 +1,107 @@
-.ccontainer{
-    background-color: blueviolet;
+
+#realTimeProducts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 20px
+}
+
+.product-card {
+    margin-bottom: 20px;
+    background-color: #f3e5f5;
+    border: 2px solid #e1bee7;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+.product-title {
+    font-size: 1.3em;
+    margin-bottom: 12px;
+    color: #2d0546;
+}
+
+.product-details {
+    margin-bottom: 18px;
+    font-size: 1em;
+    color: #8e44ad;
+}
+
+.product-price {
+    display: block;
+    font-weight: bold;
+    color: #bc4795;
+}
+
+.product-stock {
+    color: #ba68c8;
+}
+
+.buy-button {
+    background-color: #ec407a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #d81b60;
+}
+
+
+
+
+/* Estilos para el formulario */
+#formCreateProducts {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f8bbd0;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#formCreateProducts input {
+    padding: 10px;
+    border: 2px solid #d81b60;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #6a1b9a;
+    background-color: #f3e5f5;
+}
+
+#formCreateProducts button {
+    background-color: #ec407a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#formCreateProducts button:hover {
+    background-color: #d81b60;
+}
+
+#formCreateProducts input::placeholder {
+    color: #ba68c8;
+    font-size: 0.9em;
 }

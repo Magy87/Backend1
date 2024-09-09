@@ -1,13 +1,13 @@
 [
     {
         "id": "1234",
-        "title": "body",
+        "title": "Body",
         "price": 10000,
-        "stock":"03"
+        "stock":"3"
     },
     {
         "id": "124",
-        "title": "ranita",
+        "title": "Ranita",
         "price": 1000,
         "stock":"5"
     }

@@ -1,4 +1,13 @@
-<div class="container">
+<form id="formCreateProducts">
+    <input type="text" id="title" placeholder="Ingrese nombre del producto" required />
+    <input type="number" id="price" placeholder="Ingrese precio del producto" required />
+    <input type="number" id="stock" placeholder="Ingrese stock del producto" required />
+    <input type="text" id="code" placeholder="Ingrese codigo del producto" required />
+    <button type="submit">Agregar producto</button>
+</form>
+
+
+<div class="container" id="realTimeProducts">
 
 </div>
 <script src="/socket.io/socket.io.js"></script>
