@@ -1,14 +1,32 @@
 [
     {
-        "id": "1234",
-        "title": "Body",
-        "price": 10000,
-        "stock":"3"
+        "id": "1111",
+        "title": " Body",
+        "description": "Cuello americano",
+        "code": "11112",
+        "price": "10000",
+        "status": "true",
+        "stock": "10",
+        "category": "Nene"
     },
     {
-        "id": "124",
-        "title": "Ranita",
-        "price": 1000,
-        "stock":"5"
+        "id": "222",
+        "title": " Toallon",
+        "description": "Toallon con babita",
+        "code": "222",
+        "price": "20000",
+        "status": "true",
+        "stock": "10",
+        "category": "Accesorio"
+    },
+    {
+        "id": "111",
+        "title": " Ajuar",
+        "description": "Manga corta",
+        "code": "1112",
+        "price": "10000",
+        "status": "true",
+        "stock": "10",
+        "category": "Nena"
     }
 ]

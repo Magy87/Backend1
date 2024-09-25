@@ -1,4 +1,4 @@
-<div class="container">
+{{!-- <div class="container">
     {{#each products}}
     <div>
         <h3>{{title}}</h3>
@@ -6,4 +6,27 @@
         <span>{{stock}}</span>
     </div>
     {{/each}}
+</div> --}}
+<h1>HOLA</h1>
+{{#if products.length}}
+{{#each products}}
+<div class="card">
+    <h3 class="card-title">{{title}}</h3>
+    <div class="card-info">
+        <span class="card-price">{{price}}</span>
+        <span class="card-stock">{{stock}}</span>
+    </div>
 </div>
+
+
+{{/each}}
+{{else}}
+<p>No hay productos disponibles</p>
+{{/if}}
+{{!-- "id": "222",
+"title": " Toallon",
+"description": "Toallon con babita",
+"code": "222",
+"price": "20000",
+"status": "true",
+"stock": "10", --}}
