@@ -8,21 +8,30 @@
     {{/each}}
 </div> --}}
 <h1>HOLA</h1>
-{{#if products.length}}
-{{#each products}}
-<div class="card">
-    <h3 class="card-title">{{title}}</h3>
-    <div class="card-info">
-        <span class="card-price">{{price}}</span>
-        <span class="card-stock">{{stock}}</span>
+<div class="container-products">
+    {{#if products.length}}
+    {{#each products}}
+    <div class="card">
+        <h3 class="card-title">{{title}}</h3>
+       <img class="card-img" src="/public/img{{img}}" />
+
+
+        <div class="card-info">
+            <span class="card-price"> ${{price}} ARG</span>
+            <span class="card-stock">Stock: {{stock}}</span>
+        </div>
+        <div class="container-btn">
+            <button class="btn">Borrar</button>
+            <button class="btn">Actualizar</button>
+        </div>
     </div>
+
+
+    {{/each}}
+    {{else}}
+    <p>No hay productos disponibles</p>
+    {{/if}}
 </div>
-
-
-{{/each}}
-{{else}}
-<p>No hay productos disponibles</p>
-{{/if}}
 {{!-- "id": "222",
 "title": " Toallon",
 "description": "Toallon con babita",

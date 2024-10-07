@@ -1,5 +1,33 @@
 
-#realTimeProducts {
+.card{
+    width: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.container-products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-img{
+width:100%;
+height: 100px;
+object-fit: cover;
+}
+
+
+
+
+/* #realTimeProducts {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -63,7 +91,9 @@
 
 
 
-/* Estilos para el formulario */
+Estilos para el formulario */
+
+/* 
 #formCreateProducts {
     margin-top: 50px;
     display: flex;
@@ -75,8 +105,8 @@
     max-width: 400px;
     margin: 0 auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+} */
+/* 
 #formCreateProducts input {
     padding: 10px;
     border: 2px solid #d81b60;
@@ -84,8 +114,8 @@
     font-size: 1em;
     color: #6a1b9a;
     background-color: #f3e5f5;
-}
-
+} */
+/* 
 #formCreateProducts button {
     background-color: #ec407a;
     color: white;
@@ -95,13 +125,13 @@
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-}
-
+} */
+/* 
 #formCreateProducts button:hover {
     background-color: #d81b60;
-}
+/* } 
 
 #formCreateProducts input::placeholder {
     color: #ba68c8;
     font-size: 0.9em;
-}
+} */

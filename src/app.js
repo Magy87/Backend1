@@ -24,6 +24,7 @@ app.use('/static', express.static(__dirname + '/public'))
 //const io = new Server(server);
 
 //app.use('/static', express.static(__dirname + '/public'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.engine('hbs', handlebars.engine({ extname: '.hbs', runtimeOptions:{allowProtoPropertiesByDefault:true} }));
 app.set('views', __dirname + '/views');

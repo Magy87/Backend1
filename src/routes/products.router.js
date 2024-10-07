@@ -3,6 +3,7 @@ import { Router } from "express";
 //import path from "path";
 import __dirname from "../dirame.js";
 import Products from "../models/Product.js";
+import { uploader } from "../utils/multer.js";
 //import crypto from 'crypto';
 
 const router = Router();
@@ -13,17 +14,41 @@ router.get('/', async (req, res) => {
     res.json(products)
 })
 
-router.post('/', async (req, res) => {
+// router.post('/', uploader.single('file'), async (req, res) => {
+//     try {
+//         if (!req.file) {
+//             return res.status(400).json({ status: "error", error: "no se puede guardar la imagen" })
+//         }
+//         const body = req.body
+//         body.img = req.file.originalname
+//         await Products.create(body)
+//         res.json({ message: 'Producto creado' })
+//     } catch (error) {
+//         res.json(error)
+//     }
+// })
+router.post('/',uploader.single('file'),async (req,res)=>{
     try {
+        if (!req.file) {
+            return res.status(400).json({ status: "error", error: "No se pudo guardar la imagen" })
+        }
+    
         const body = req.body
-        await Products.create(body)
-        res.json({ message: 'Producto creado' })
+        body.img = req.file.originalname
+        await Product.create(body)
+        res.json({message:'Product created'})
     } catch (error) {
         res.json(error)
     }
 })
 
 export default router;
+
+
+
+
+
+
 // const productsFilePath = path.join(__dirname, 'adb', 'products.json');
 
 // router.get('/', async (req, res) => {

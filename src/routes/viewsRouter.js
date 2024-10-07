@@ -21,8 +21,13 @@ router.get('/', async (req, res) => {
         const products = await Product.find({})
         res.render('index', { products })
     } catch (error) {
-        res.json (error)
+        res.json(error)
     }
+});
+
+router.get('/create-product', async (req, res) => {
+    res.render('create-product')
+
 });
 
 export default router

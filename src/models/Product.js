@@ -7,9 +7,9 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        index: true
+
     },
-    // description:String,
+    description: String,
     price: {
         type: Number,
         required: true
@@ -18,10 +18,10 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // img:{
-    //     type:String,
-    //     required:true
-    // }
+    img:{
+        type:String,
+        required:true
+    }
 })
 
 ProductSchema.plugin(mongoosePaginate)
