@@ -1,7 +1,7 @@
 import { Router } from "express";
 //import fs from "fs/promises";
 //import path from "path";
-import __dirname from "../dirame.js";
+import __dirname from "../dirname.js";
 import Products from "../models/Product.js";
 import { uploader } from "../utils/multer.js";
 //import crypto from 'crypto';
@@ -27,20 +27,23 @@ router.get('/', async (req, res) => {
 //         res.json(error)
 //     }
 // })
-router.post('/',uploader.single('file'),async (req,res)=>{
+router.post('/', uploader.single('file'), async (req, res) => {
     try {
         if (!req.file) {
-            return res.status(400).json({ status: "error", error: "No se pudo guardar la imagen" })
+            return res.status(400).json({ status: "error", error: "no se puede guardar la imagen" });
         }
-    
-        const body = req.body
-        body.img = req.file.originalname
-        await Product.create(body)
-        res.json({message:'Product created'})
+
+        const body = req.body;
+        // Asegúrate de que la ruta de la imagen sea accesible
+        body.img = `/uploads/${req.file.originalname}`; 
+
+        await Products.create(body);
+        res.json({ message: 'Producto creado' });
     } catch (error) {
-        res.json(error)
+        console.error(error); 
+        res.status(500).json({ status: "error", error: error.message });
     }
-})
+});
 
 export default router;
 
