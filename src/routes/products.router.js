@@ -39,7 +39,7 @@ router.post('/', uploader.single('file'), async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await Products.deleteOne({ _id: id });  // Usar "Products" en lugar de "Product"
+        const result = await Products.deleteOne({ _id: id }); 
 
         if (result.deletedCount === 0) {
             return res.status(404).json({ message: 'Producto no encontrado' });
@@ -52,95 +52,31 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.put('/:id', uploader.single('file'), async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updates = req.body;
+
+        if (req.file) {
+            updates.img = `/static/img/${req.file.originalname}`;
+        }
+
+        const result = await Products.findByIdAndUpdate(id, updates, { new: true });
+
+        if (!result) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        res.status(200).json({ message: 'Producto actualizado', product: result });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error actualizando el producto', error });
+    }
+});
 
 
 
 export default router;
-
-
-
-// const productsFilePath = path.join(__dirname, 'adb', 'products.json');
-
-// router.get('/', async (req, res) => {
-//     try {
-//         const data = await fs.readFile(productsFilePath, 'utf-8');
-//         const products = JSON.parse(data);
-//         res.status(200).json(products);
-//     } catch (error) {
-//         res.status(500).json({ message: "Error al leer el archivo de productos" });
-//     }
-// });
-
-// router.get('/:id', async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//         const data = await fs.readFile(productsFilePath, 'utf-8');
-//         const products = JSON.parse(data);
-//         const product = products.find(product => product.id === id);
-//         if (product) {
-//             res.status(200).json(product);
-//         } else {
-//             res.status(404).json({ error: "Producto no encontrado" });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ message: "Error al leer el archivo de productos" });
-//     }
-// });
-
-// router.post('/', async (req, res) => {
-//     const body = req.body;
-//     try {
-//         const data = await fs.readFile(productsFilePath, 'utf-8');
-//         const products = JSON.parse(data);
-//         if (products.some(product => product.code === body.code)) {
-//             return res.status(400).json({ error: "Producto ya existente" });
-//         }
-//         const newProduct = {
-//             id: crypto.randomUUID(), // Corregido randowUUID a randomUUID
-//             ...body
-//         };
-//         products.push(newProduct);
-//         await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2));
-//         res.status(201).json({ message: "Producto creado exitosamente" });
-//     } catch (error) {
-//         res.status(500).json({ message: "Error al leer o escribir el archivo de productos" });
-//     }
-// });
-
-// router.patch('/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const body = req.body;
-//     try {
-//         const data = await fs.readFile(productsFilePath, 'utf-8');
-//         const products = JSON.parse(data);
-//         const index = products.findIndex(product => product.id === id);
-//         if (index === -1) {
-//             return res.status(404).json({ error: "Producto no encontrado" });
-//         }
-//         products[index] = { ...products[index], ...body };
-//         await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2));
-//         res.status(200).json({ message: "Producto actualizado exitosamente" });
-//     } catch (error) {
-//         res.status(500).json({ message: "Error al leer o escribir el archivo de productos" });
-//     }
-// });
-
-// router.delete('/:id', async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//         const data = await fs.readFile(productsFilePath, 'utf-8');
-//         const products = JSON.parse(data);
-//         const index = products.findIndex(product => product.id === id);
-//         if (index === -1) {
-//             return res.status(404).json({ error: "Producto no encontrado" });
-//         }
-//         const newProducts = products.filter(product => product.id !== id);
-//         await fs.writeFile(productsFilePath, JSON.stringify(newProducts, null, 2));
-//         res.status(200).json({ message: "Producto eliminado" });
-//     } catch (error) {
-//         res.status(500).json({ message: "Error al leer o escribir el archivo de productos" });
-//     }
-// });
 
 
 

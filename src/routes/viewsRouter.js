@@ -5,17 +5,6 @@ import Product from "../models/Product.js";
 
 const router = Router()
 
-// router.get('/products', async (req, res) => {
-//     const data = await fs.promises.readFile("products.json", 'utf-8')
-//     const products = JSON.parse(data)
-//     console.log(products)
-//     res.status(200).render("index", { products })
-// })
-
-// router.get('/realTimeProducts', async (req, res) => {
-
-//     res.status(200).render("realTimeProducts", {})
-// })
 router.get('/', async (req, res) => {
     try {
         const products = await Product.find({})
@@ -28,6 +17,17 @@ router.get('/', async (req, res) => {
 router.get('/create-product', async (req, res) => {
     res.render('create-product')
 
+});
+
+
+router.get('/update-product/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+        res.render('update-product', { ...product.toObject() });
+    } catch (error) {
+        res.status(500).json({ message: 'Error obteniendo el producto', error });
+    }
 });
 
 export default router

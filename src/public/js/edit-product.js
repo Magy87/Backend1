@@ -23,7 +23,7 @@ deleteButtons.forEach(button => {
 
             if (response.ok) {
                 alert('Producto eliminado');
-                window.location.reload(); // Refresca la página para reflejar los cambios
+                window.location.reload();
             } else {
                 const error = await response.json();
                 console.error(error);
