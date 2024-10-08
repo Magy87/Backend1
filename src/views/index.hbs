@@ -1,11 +1,11 @@
-
 <h1>HOLA</h1>
 <div class="container-products">
     {{#if products.length}}
     {{#each products}}
     <div class="card">
         <h3 class="card-title">{{title}}</h3>
-        <img class="card-img" src="/public/img/uploads{{img}}" />
+        <img class="card-img" src="{{img}}" />
+
 
 
         <div class="card-info">
@@ -13,8 +13,10 @@
             <span class="card-stock">Stock: {{stock}}</span>
         </div>
         <div class="container-btn">
-            <button class="btn">Borrar</button>
-            <button class="btn">Actualizar</button>
+            <button class="btn-delete" data-id="{{_id}}">Eliminar</button>
+
+            {{!-- // <button id="delete-{{id}}" class="btn btn-delete">Borrar</button> --}}
+            <button class="btn btn-update">Actualizar</button>
         </div>
     </div>
 
@@ -25,6 +27,7 @@
     {{/if}}
 </div>
 
+<script src="/static/js/edit-product.js"></script>
 {{!-- "id": "222",
 "title": " Toallon",
 "description": "Toallon con babita",

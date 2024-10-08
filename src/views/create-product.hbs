@@ -1,9 +1,10 @@
-<form id="create-product"></form>
-    <input type="text" name="title" class="create-product-input" placeholder="Ingrese nombre del producto" required>
-    <input type="number" name="price" class="create-product-input" placeholder="Ingrese precio del producto" required>
-    <input type="number" name="stock" class="create-product-input" placeholder="Ingrese stock del producto" required>
-    <input type="file" name="file" class="create-product-input" required>
-    <button type="submit">Crear Producto</button>
+<form id="create-product" enctype="multipart/form-data">
+   <input type="text" name="title" class="create-product-title" placeholder="Ingrese nombre del producto" required>
+   <input type="number" name="price" class="create-product-price" placeholder="Ingrese precio del producto" required>
+   <input type="number" name="stock" class="create-product-stock" placeholder="Ingrese stock del producto" required>
+   <input type="file" name="file" class="create-product-file" required>
+   <button type="submit">Crear Producto</button>
 </form>
+
 
 <script src="/static/js/create-product.js"></script>
